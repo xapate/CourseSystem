@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-6-9 23:56:04 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="entity.Student" table="student" catalog="coursesystem">
+        <id name="sno" type="int">
+            <column name="sno" />
+            <generator class="assigned" />
+        </id>
+        <property name="sname" type="string">
+            <column name="sname" length="20" not-null="true" />
+        </property>
+        <property name="spassword" type="string">
+            <column name="spassword" length="20" />
+        </property>
+        <property name="sclass" type="string">
+            <column name="sclass" length="20" />
+        </property>
+    </class>
+</hibernate-mapping>
