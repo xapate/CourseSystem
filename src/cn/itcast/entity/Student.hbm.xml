@@ -6,7 +6,7 @@
     <class name="entity.Student" table="student" catalog="coursesystem">
         <id name="sno" type="int">
             <column name="sno" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
         <property name="sname" type="string">
             <column name="sname" length="20" not-null="true" />

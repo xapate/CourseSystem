@@ -1,39 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-	 http://www.springframework.org/schema/beans/spring-beans.xsd
-	 http://www.springframework.org/schema/aop
-	 http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
-	 http://www.springframework.org/schema/context 
-	 http://www.springframework.org/schema/context/spring-context-3.2.xsd
-	 http://www.springframework.org/schema/tx
-	 http://www.springframework.org/schema/tx/spring-tx.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+	 
 	<context:property-placeholder location="classpath:mysql.properties" />
+	
 	<!-- 数据源 -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-		
 		<property name="jdbcUrl" value="${jdbc.jdbcUrl}"></property>
 		<property name="user" value="${jdbc.user}"></property>
 		<property name="password" value="${jdbc.password}"></property>
+		<property name="initialPoolSize" value="${jdbc.initialPoolSize}"></property>
+		<property name="maxPoolSize" value="${jdbc.maxPoolSize}"></property>
 	</bean>
+	
 	<!-- 配置sessionFactory -->
-	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-	<!-- 配置数据源 -->
-	<property name="dataSource" ref="dataSource"></property>
-	<property name="hibernateProperties">
-	<props>
-	<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-	<prop key="hibernate.format_sql">true</prop>
-	<prop key="hibernate.hbm2ddl.auto">update</prop>
-	<prop key="javax.persistence.validation.mode">none</prop>
-	<prop key="hibernate.current_session_context_class">thread</prop> <!--是spring整合hibernate用的语句-->
-	</props>
-	</property>
-	<!-- 配置映射文件 -->
-	
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		
+		<!-- 配置数据源 -->
+		<property name="dataSource" ref="dataSource"></property>
+		
+		<!-- 配置hibernate配置文件位置 -->
+		<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
+		
+		<!-- 配置映射文件 -->
+		<property name="mappingLocations" value="classpath*:cn/itcast/dao/**/*.hbm.xml" />
 	</bean>
-	
+	<bean id="userDaoImpl" class="cn.itcast.dao.impl.UserDaoImpl">
+		<property name="sessionFactory">
+			<ref local="sessionFactory"/>
+		</property>
+	</bean>
 
+	<!-- 配置spring的声名式事物 -->
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager"
+		proxy-target-class="true" />
+		
+	<!-- 配置事物切点 并把切点和事务属性联系起来 -->
+	<aop:config>
+	<aop:pointcut expression="execution(* cn.itcast.service.*.*(..))" id="txPiontcut"/>
+	</aop:config>
 </beans>
