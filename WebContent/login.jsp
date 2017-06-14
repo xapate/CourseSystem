@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -9,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="style/register-login.css">
 </head>
 <body>
+<s:form action="login!log.action" method="post" namespace="/action">
 <div id="box"></div>
 <div class="cent-box">
 	
@@ -26,10 +28,10 @@
 		<div class="login form">
 			<div class="group">
 				<div class="group-ipt email">
-					<input type="text" name="xuehao" id="xuehao" class="ipt" placeholder="输入您的学号" required>
+					<input type="text" name="student.sno" id="xuehao" class="ipt" placeholder="输入您的学号" required>
 				</div>
 				<div class="group-ipt password">
-					<input type="password" name="password" id="password" class="ipt" placeholder="输入您的登录密码" required>
+					<input type="password" name="student.spassword" id="password" class="ipt" placeholder="输入您的登录密码" required>
 				</div>
 	
 			</div>
@@ -42,6 +44,7 @@
 		<div class="remember clearfix">
 			<label class="remember-me"><span class="icon"><span class="zt"></span></span><input type="checkbox" name="remember-me" id="remember-me" class="remember-mecheck" checked>记住我</label>
 			<label class="forgot-password">
+			  ${msg}
 				<a href="register.jsp">用户注册</a>
 			</label>
 		</div>
@@ -55,6 +58,6 @@
 <script src='js/jquery.min.js' type="text/javascript"></script>
 <script src='js/layer/layer.js' type="text/javascript"></script>
 <script src='js/index.js' type="text/javascript"></script>
-
+</s:form>
 </body>
 </html>

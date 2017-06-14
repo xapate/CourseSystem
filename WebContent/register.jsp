@@ -30,7 +30,7 @@
 							placeholder="设置登录密码" required>
 					</div>
 					<div class="group-ipt password1">
-						<input type="password" name="student.spassword" id="sname" class="ipt"
+						<input type="password" name="student.spassword1" id="sname" class="ipt"
 							placeholder="重复密码" required>
 					</div>
 					<div class="group-ipt user">
@@ -42,7 +42,7 @@
 							placeholder="性别" required>
 					</div>
 					<div class="group-ipt user">
-						<input type="text" name="student.sclass" id="student.sclass" class="ipt"
+						<input type="text" name="student.sclass" id="class" class="ipt"
 							placeholder="班级" required>
 					</div>
 					<div class="group-ipt user">

@@ -55,8 +55,9 @@
 		<!-- 配置hibernate配置文件位置 -->
 		<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
 		<!-- 配置映射文件 -->
-		<property name="mappingLocations" value="classpath*:cn/itcast/dao/**/*.hbm.xml" />
+		<property name="packagesToScan" value="cn.itcast.entity"></property>
 	</bean>
+
 
 	<!-- 配置spring的声名式事物 -->
 	<!-- 配置事务管理器 -->
