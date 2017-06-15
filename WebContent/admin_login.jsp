@@ -27,10 +27,13 @@
 		<div class="login form">
 			<div class="group">
 				<div class="group-ipt email">
-					<input type="text" name="admin" id="admin" class="ipt" placeholder="输入管理员账号" required>
+					<input type="text" name="admin" id="admin" class="ipt" placeholder="输入管理员账号" maxlength="12"
+					 	onkeyup="if(/\D/.test(this.value)){alert('只能输入数字');this.value='';}"
+					 	required>
 				</div>
 				<div class="group-ipt password">
-					<input type="password" name="password" id="password" class="ipt" placeholder="输入管理员密码" required>
+					<input type="password" name="password" id="password" class="ipt" placeholder="输入管理员密码" maxlength="12"
+						required>
 				</div>
 	
 			</div>

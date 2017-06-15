@@ -22,31 +22,37 @@
 			<div class="login form">
 				<div class="group">
 					<div class="group-ipt email">
-						<input type="text" name="student.sno" id="xuehao" class="ipt"
+						<input type="text" name="student.sno" id="xuehao" class="ipt" maxlength="8"
+							onkeyup="if(/\D/.test(this.value)){alert('只能输入数字');this.value='';}"
 							placeholder="学号" required>
 					</div>
 					<div class="group-ipt password">
-						<input type="password" name="student.spassword" id="password" class="ipt"
+						<input type="password" name="student.spassword" id="password" class="ipt" maxlength="12"
+							onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"
 							placeholder="设置登录密码" required>
 					</div>
 					<div class="group-ipt password1">
 						<input type="password" name="student.spassword1" id="sname" class="ipt"
+							onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"
 							placeholder="重复密码" required>
 					</div>
 					<div class="group-ipt user">
-						<input type="text" name="student.sname" id="student.sname" class="ipt"
+						<input type="text" name="student.sname" id="student.sname" class="ipt" maxlength="4"
+						
 							placeholder="姓名" required>
 					</div>
 					<div class="group-ipt user">
-						<input type="text" name="sex" id="student.sex" class="ipt"
+						<input type="text" name="sex" id="student.sex" class="ipt" maxlength="1"
 							placeholder="性别" required>
+							
 					</div>
 					<div class="group-ipt user">
-						<input type="text" name="student.sclass" id="class" class="ipt"
+						<input type="text" name="student.sclass" id="class" class="ipt" 
 							placeholder="班级" required>
 					</div>
 					<div class="group-ipt user">
-						<input type="text" name="content" id="student.content" class="ipt"
+						<input type="text" name="content" id="student.content" class="ipt" maxlength="11"
+						onkeyup="if(/\D/.test(this.value)){alert('只能输入数字');this.value='';}"
 							placeholder="联系方式" required>
 					</div>
 
